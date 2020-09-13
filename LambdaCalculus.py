@@ -29,7 +29,11 @@ THREE = lambda f: lambda x: f(f(f(x)))
 SUCC = lambda n: (lambda f: lambda x: f(n(f)(x)))
 ADD = lambda x: lambda y: y(SUCC)(x)
 MUL = lambda x: lambda y: lambda f: y(x(f))
+ISZERO = lambda n: n(lambda x: FALSE)(TRUE)
 
-print(SUCC(TWO)(incr)(0))
-print(ADD(TWO)(THREE)(incr)(0))
-print(MUL(TWO)(THREE)(incr)(0))
+
+assert SUCC(TWO)(incr)(0) == 3
+assert ADD(TWO)(THREE)(incr)(0) == 5
+assert MUL(TWO)(THREE)(incr)(0) == 6
+assert ISZERO(ZERO) is TRUE
+assert ISZERO(ONE) is FALSE
